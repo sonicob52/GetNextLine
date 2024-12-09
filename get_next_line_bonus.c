@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frgarci2 <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:43:19 by frgarci2          #+#    #+#             */
-/*   Updated: 2024/11/28 17:30:53 by frgarci2         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:24:13 by frgarci2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*f_stored(int fd, char *toline)
 {
@@ -51,33 +51,12 @@ char	*f_to_storeg(char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*temp;
+	static char	*temp[OPEN_MAX];
 	char		*line;
 
-	line = f_stored(fd, temp);
-	temp = f_to_storeg(line) + 1;
+	if (fd < 0 || fd >= OPEN_MAX)
+		return (NULL);
+	line = f_stored(fd, temp[fd]);
+	temp[fd] = f_to_storeg(line) + 1;
 	return (f_get_line(line));
 }
-/*
-int	main(void)
-{
-	int		fd;
-	char		*line;
-	//int		lines;
-
-	//lines = 1;
-	fd = open("frank.txt", O_RDONLY);
-	//while ((line = get_next_line(fd)))
-		//printf("%d->%s\n", lines++, line);
-	printf("Linea : %s\n", get_next_line(fd));
-	printf("Linea : %s\n", get_next_line(fd));
-	printf("Linea : %s\n", get_next_line(fd));
-	printf("Linea : %s\n", get_next_line(fd));
-	printf("Linea : %s\n", get_next_line(fd));
-	printf("Linea : %s\n", get_next_line(fd));
-	printf("Linea : %s\n", get_next_line(fd));
-
-	close(fd);
-	return (0);
-}
-*/
