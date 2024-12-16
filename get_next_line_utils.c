@@ -30,13 +30,8 @@ char	*f_strjoin(char *s1, char const *s2)
 	int		j;
 	char	*str;
 
-	if (!s1 || !s2)
-	{
-		s1 = malloc(sizeof(char) + 1);
-		if (!s1 || !s2)
-			return (NULL);
-		s1[0] = '\0';
-	}
+	if (!s1)
+		s1 = "";
 	str = malloc(sizeof(char) * ((f_strlen(s1)) + (f_strlen(s2)) + 1));
 	if (str == NULL)
 		return (NULL);
