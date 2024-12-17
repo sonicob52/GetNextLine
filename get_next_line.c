@@ -6,28 +6,27 @@
 /*   By: frgarci2 <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:43:19 by frgarci2          #+#    #+#             */
-/*   Updated: 2024/11/28 17:30:53 by frgarci2         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:06:28 by frgarci2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *f_stored(int fd, char *toline)
+char	*f_stored(int fd, char *toline)
 {
-	char buffer[BUFFER_SIZE + 1];
-	char *temp;
-	ssize_t nbts;
+	char	buffer[BUFFER_SIZE + 1];
+	char	*temp;
+	ssize_t	nbts;
 
 	temp = NULL;
 	while (!f_strt(toline, '\n'))
 	{
 		nbts = read(fd, buffer, BUFFER_SIZE);
 		if (nbts == 0)
-			break;
+			break ;
 		if (nbts == -1)
 		{
 			free(toline);
-			// toline = NULL;
 			return (NULL);
 		}
 		buffer[nbts] = '\0';
@@ -39,11 +38,11 @@ char *f_stored(int fd, char *toline)
 	return (toline);
 }
 
-char *f_to_storeg(char *str)
+char	*f_to_storeg(char *str)
 {
-	int l1;
-	int l2;
-	char *rest;
+	int		l1;
+	int		l2;
+	char	*rest;
 
 	if (str == NULL)
 		return (NULL);
@@ -51,22 +50,22 @@ char *f_to_storeg(char *str)
 	l2 = f_strlen(f_strt(str, '\n'));
 	rest = f_sstr(str, (l1 - l2) + 1, l2 - 1);
 	if (rest == NULL)
-		return (NULL);	
+		return (NULL);
 	return (rest);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static char *temp;
-	char *line;
-	char *result;
+	static char	*temp;
+	char		*line;
+	char		*result;
 
 	line = f_stored(fd, temp);
 	if (!line)
 		return (NULL);
 	temp = f_to_storeg(line);
 	result = f_get_line(line);
-    free(line);
+	free(line);
 	return (result);
 }
 
