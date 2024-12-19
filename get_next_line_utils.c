@@ -102,7 +102,7 @@ char	*f_get_line(char *buffer)
 	if (buffer == NULL)
 		return (NULL);
 	l1 = f_strlen(buffer);
-	l2 = f_strlen(f_strt(buffer, '\n')) + 1;
+	l2 = f_strlen(f_strt(buffer, '\n'));
 	line = f_sstr(buffer, 0, (l1 - l2) + 1);
 	if (line == NULL)
 		return (NULL);

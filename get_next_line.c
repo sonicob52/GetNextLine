@@ -6,7 +6,7 @@
 /*   By: frgarci2 <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:43:19 by frgarci2          #+#    #+#             */
-/*   Updated: 2024/12/17 18:06:28 by frgarci2         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:56:36 by frgarci2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*result;
 
+	result = NULL;
 	line = f_stored(fd, temp);
 	if (!line)
 		return (NULL);
@@ -79,7 +80,7 @@ int main(void)
 	fd = open("frank.txt", O_RDONLY);
 	while ((line = get_next_line(fd)))
 	{
-		printf("%d->%s\n", lines++, line);
+		printf("%d->%s", lines++, line);
 		free(line);
 	}
 
